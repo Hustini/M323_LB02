@@ -2,41 +2,54 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-
-# Objektorientierter Ansatz
-class RectangleOO:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-
-    def area(self):
-        return self.width * self.height
-
-# Prozeduraler Ansatz
-def calculate_area_procedural(width, height):
-    return width * height
+# Beispiel-Daten
+numbers = [1, 2, 3, 4, 5]
 
 
-# Funktionaler Ansatz
-calculate_area_functional = lambda width, height: width * height
+# Objektorientierte Programmierung
+class SummationCalculator:
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def calculate_sum(self):
+        result = 0
+        for num in self.numbers:
+            result += num
+        return result
 
 
-@app.route('/A1E', methods=['GET', 'POST'])
-def a1e():
-    width = 1
-    height = 1
+@app.route('/A1E/functional', methods=['GET'])
+def get_functional_sum():
+    result = sum(numbers)
+    return jsonify({
+        'approach': 'functional',
+        'result': result,
+        'numbers': numbers
+    })
 
-    # Objektorientierte Lösung
-    rectangle_oo = RectangleOO(width, height)
-    area_oo = rectangle_oo.area()
 
-    # Prozedurale Lösung
-    area_procedural = calculate_area_procedural(width, height)
+@app.route('/A1E/procedural', methods=['GET'])
+def get_procedural_sum():
+    result = 0
+    for num in numbers:
+        result += num
 
-    # Funktionale Lösung
-    area_functional = calculate_area_functional(width, height)
+    return jsonify({
+        'approach': 'procedural',
+        'result': result,
+        'numbers': numbers
+    })
 
-    return f'object_oriented: {area_oo}, procedural: {area_procedural}, functional: {area_functional}'
+
+@app.route('/A1E/oop', methods=['GET'])
+def get_oop_sum():
+    calculator = SummationCalculator(numbers)
+    result = calculator.calculate_sum()
+    return jsonify({
+        'approach': 'object-oriented',
+        'result': result,
+        'numbers': numbers
+    })
 
 
 if __name__ == '__main__':
