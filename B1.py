@@ -28,7 +28,28 @@ def algorithm():
 
 @app.route('/B1F', methods=['GET'])
 def get_immutable_values_result():
-    return jsonify({})
+    def sort_pass(lst):
+        if len(lst) <= 1:
+            return lst
+        if lst[0] > lst[1]:
+            return [lst[1]] + sort_pass([lst[0]] + lst[2:])
+        return [lst[0]] + sort_pass(lst[1:])
+
+    def sort(lst, n=None):
+        if n is None:
+            n = len(lst)
+        if n == 1:
+            return lst
+        lst = sort_pass(lst)
+        return sort(lst, n - 1)
+
+    numbers = [5, 4, 3, 2, 1]
+    result = sort(numbers)
+    return jsonify({
+        'approach': 'functional algorithm',
+        'result': result,
+        'numbers': numbers
+    })
 
 
 @app.route('/B1E', methods=['GET'])
