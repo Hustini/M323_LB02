@@ -5,10 +5,20 @@ app = Flask(__name__)
 
 @app.route('/B1G', methods=['GET'])
 def algorithm():
-    numbers = [1, 2, 3, 4, 5]
-    result = 0
-    for number in numbers:
-        result += number
+    numbers = [5, 4, 3, 2, 1]
+    def bubble_sort(numbers):
+        sorted = False
+        while not sorted:
+            changed = False
+            for i in range(len(numbers) - 1):
+                if numbers[i] > numbers[i + 1]:
+                    numbers[i], numbers[i + 1] = numbers[i + 1], numbers[i]
+                    changed = True
+            if not changed:
+                sorted = True
+                return numbers
+    result = bubble_sort(numbers)
+
     return jsonify({
         'approach': 'algorithm',
         'result': result,
