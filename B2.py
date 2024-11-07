@@ -16,17 +16,32 @@ def funktion():
 
 
 @app.route('/B2F', methods=['GET'])
-def get_immutable_values_result():
+def funktion():
+    def apply_operation(func, x, y):
+        return func(x, y)
+
+    result = apply_operation(sum, 5, 10)
+
     return jsonify({
-        'approach': 'functional algorithm',
+        'approach': 'func as an argument',
         'result': result,
-        'numbers': numbers
     })
 
 
 @app.route('/B2E', methods=['GET'])
-def get_functional_sum():
-    return jsonify({})
+def funktion():
+    def create_multiplier(n):
+        def multiplier(x):
+            return x * n
+        return multiplier
+
+    double = create_multiplier(2)
+    triple = create_multiplier(3)
+
+    return jsonify({
+        'approach': 'Closures',
+        'result': (double, triple),
+    })
 
 
 if __name__ == '__main__':
