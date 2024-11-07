@@ -16,11 +16,14 @@ def funktion():
 
 
 @app.route('/B2F', methods=['GET'])
-def funktion():
-    def apply_operation(func, x, y):
-        return func(x, y)
+def funktion_2():
+    def apply_to_list(func, value):
+        return func(value)
+    def square(x):
+        return x * x
 
-    result = apply_operation(sum, 5, 10)
+    x = 2
+    result = apply_to_list(square, x)
 
     return jsonify({
         'approach': 'func as an argument',
@@ -29,18 +32,17 @@ def funktion():
 
 
 @app.route('/B2E', methods=['GET'])
-def funktion():
+def funktion_3():
     def create_multiplier(n):
         def multiplier(x):
             return x * n
         return multiplier
 
-    double = create_multiplier(2)
-    triple = create_multiplier(3)
+    result = create_multiplier(2)
 
     return jsonify({
         'approach': 'Closures',
-        'result': (double, triple),
+        'result': f'{result}'
     })
 
 
