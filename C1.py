@@ -3,29 +3,41 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
-@app.route('/B4G', methods=['GET'])
+@app.route('/C1G', methods=['GET'])
 def funktion():
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    result = 0
+    for i in range(len(data)):
+        result += data[i]
+
+    result = sum(data)
 
     return jsonify({
-        'approach': 'map, filter, reduce',
-        'result': f'',
+        'approach': 'Refactoring',
+        'result': f'{result}',
     })
 
 
-@app.route('/B4F', methods=['GET'])
+@app.route('/C1F', methods=['GET'])
 def funktion_2():
+    data = [1, 2, 3, 4, 5]
+    result = 0
+    for i in range(len(data)):
+        result += data[i]
+
+    result = sum(data)
 
     return jsonify({
-        'approach': 'list of all even numbers double',
-        'result': f'',
+        'approach': 'Refactoring',
+        'result': f'{result}',
     })
 
 
-@app.route('/B4E', methods=['GET'])
+@app.route('/C1E', methods=['GET'])
 def funktion_3():
 
     return jsonify({
-        'approach': 'Total value per product where price over 20',
+        'approach': '',
         'result': f''
     })
 
